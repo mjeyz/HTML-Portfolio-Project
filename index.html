@@ -1,43 +1,330 @@
-<!-- TODO 1: Create the HTML Boilerplate -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Online Resume</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid white;
+            margin: 0 auto 20px;
+            display: block;
+            object-fit: cover;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .name {
+            font-size: 2.5em;
+            font-weight: 300;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .intro {
+            font-size: 1.1em;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #e74c3c;
+        }
+
+        .section-content {
+            color: #666;
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+
+        .education-list,
+        .skills-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .education-item,
+        .skills-item {
+            background: #f8f9fa;
+            margin-bottom: 15px;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .education-item:hover,
+        .skills-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .degree {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 1.1em;
+        }
+
+        .institution {
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        .work-experience {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .job-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .company {
+            opacity: 0.9;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .skill-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-item:hover {
+            transform: scale(1.05);
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .contact-title {
+            font-size: 1.5em;
+            margin-bottom: 25px;
+            color: #ecf0f1;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            color: #bdc3c7;
+            margin: 5px 0;
+        }
+
+        .contact-item a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: #e74c3c;
+        }
+
+        .footer-divider {
+            width: 50%;
+            margin: 20px auto;
+            border: none;
+            height: 1px;
+            background: #34495e;
+        }
+
+        .copyright {
+            color: #95a5a6;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        .last-updated {
+            color: #7f8c8d;
+            font-size: 12px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            .name {
+                font-size: 2em;
+            }
+
+            .section-title {
+                font-size: 1.5em;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Mudasir Abbas Portfolio</h1>
-    <h2>I'm a Web Developer</h2>
-<hr>
-<h2><a href="./public/movie-ranking.html">Movie Ranking Project</a></h2>
+    <div class="container">
+        <div class="header">
+            <img class="profile-img" src="./portfolio_image.jpg" alt="Mudasir Abbas">
+            <h1 class="name">Mudasir Abbas</h1>
+            <p class="intro">Welcome to my online resume. Here you can find information about my skills, experience, and education.</p>
+        </div>
 
-<h3>The Best Movie According to Mudasir</h3>
-<h4>My top 3 movies of all time.</h4>
-<hr>
-<h5>The Shawshank Redemption</h5>
-<p>This is my favourite movie</p>
-<h5>2. The Godfather</h5>
-<p>Really cool movie</p>
-<h5>3. Inception</h5>
-<p>Best science fiction movie</p>
+        <div class="content">
+            <div class="section">
+                <h2 class="section-title">Summary</h2>
+                <p class="section-content">I am a passionate web developer with experience in creating dynamic
+                     and responsive websites. My skills include HTML, CSS, JavaScript, and various web development frameworks. I am Student of BS Artificial Intelligence in University of Lahore</p>
+            </div>
 
-<h2><a href="./public/birthday-invite.html">Birthday Invite Project</a></h2>
+            <div class="section">
+                <h2 class="section-title">Education</h2>
+                <ul class="education-list">
+                    <li class="education-item">
+                        <div class="degree">Bachelor of Science in Artificial Intelligence</div>
+                        <div class="institution">University of Lahore (2025 - 2029)</div>
+                    </li>
+                    <li class="education-item">
+                        <div class="degree">Intermediate in Computer Science</div>
+                        <div class="institution">Govt Degree College, Layyah (2023 - 2025)</div>
+                    </li>
+                    <li class="education-item">
+                        <div class="degree">Matriculation in Science</div>
+                        <div class="institution">Govt High School, Layyah (2021 - 2023)</div>
+                    </li>
+                </ul>
+            </div>
 
-<h4>it's my Birthday!</h4>
-<h5>on the 12th February</h5>
+            <div class="section">
+                <h2 class="section-title">Work Experience</h2>
+                <div class="work-experience">
+                    <div class="job-title">Software Engineer Intern</div>
+                    <div class="company">Software Insight Company (2024 - Present)</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">Skills</h2>
+                <p class="section-content">I am proficient in the following skills:</p>
+                <div class="skills-grid">
+                    <div class="skill-item">HTML</div>
+                    <div class="skill-item">CSS</div>
+                    <div class="skill-item">JavaScript</div>
+                    <div class="skill-item">C++</div>
+                    <div class="skill-item">Python</div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <h3 class="contact-title">Contact Information</h3>
+            <div class="contact-info">
+                <div class="contact-item">
+                    Email: <a href="mailto:mudasirjamshaid0@gmail.com">mudasirjamshaid0@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    Phone: <a href="tel:+923064259992">+923064259992</a>
+                </div>
+                <div class="contact-item">
+                    LinkedIn: <a href="https://linkedin.com/in/mjeyz">linkedin.com/in/mjeyz</a>
+                </div>
+                <div class="contact-item">
+                    GitHub: <a href="https://github.com/mjeyz">github.com/mjeyz</a>
+                </div>
+            </div>
+            <hr class="footer-divider">
+            <p class="copyright">© 2025 Mudasir Abbas. All rights reserved.</p>
+            <p class="last-updated">Last updated: August 2025</p>
+        </footer>
+    </div>
 </body>
 </html>
-<!-- TODO 2: Add Your previous projects' HTML into the public folder -->
-
-<!-- TODO 3: Take screenshots of your project previews and add the images to the images folder -->
-
-<!-- TODO 4: Add titles/subtitles etc. -->
-
-<!-- TODO 5: Add a link to the project pages -->
-
-<!-- TODO 6: Add images to show the project previews
-HINT for TODO 6: You can use the height attribute set to 200 to make the image smaller:
-https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-height -->
-
-<!-- TODO 7: Add the Contact Me and About Me page links -->
